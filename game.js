@@ -14,12 +14,12 @@ var Player = {
 
 
 
-var interpret = function(str){
+var interpret = function(inString){
     console.log('calling interpret');
-    var Obj = {}
-    //error "cannot read property 'trim' of undefined"
-    str = str.trim();
-    var words = str.split(" ");
+    var Obj = {};
+    var trimString = inString.trim();
+    var lowerString = trimString.toLowerCase();
+    var words = lowerString.split(" ");
     Obj.action = words.shift();
     Obj.object = words.join();
     return Obj;
@@ -32,14 +32,17 @@ var execute = function(command){
 
 var report = function(){
     console.log('calling report');
+    var ul = document.querySelector("#inventory > ul");
     for(i in Player.items){
-        return document.querySelector("#inventory > ul");
+        var line = document.createElement("li");
+        line.textContent = Player.items[i];
+        ul.appendChild(line);
     }
 }
 
 var gameStep = function(){
-    var input = this.value;
-    var object = interpret(input);
+    var inputBox = document.querySelector("input");
+    var object = interpret(inputBox.value);
     execute(object);
     report();
 }
