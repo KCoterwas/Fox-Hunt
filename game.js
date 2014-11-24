@@ -12,8 +12,6 @@ var Player = {
      }
 }
 
-
-
 var interpret = function(inString){
     console.log('calling interpret');
     var Obj = {};
@@ -30,6 +28,7 @@ var execute = function(command){
     Player[command.action](command.object);
 }
 
+/* Old report function
 var report = function(){
     console.log('calling report');
     var ul = document.querySelector("#inventory > ul");
@@ -38,6 +37,35 @@ var report = function(){
         line.textContent = Player.items[i];
         ul.appendChild(line);
     }
+}
+*/
+
+var displayActions = function() {
+    var ul = document.querySelector("#help > ul");
+    /* Need to make action
+    for (i in Player.action){
+         var line = document.createElement("li");
+         line.textContent = Player.action[i];
+         ul.appendChild(line);
+    */    
+}
+
+var displayInventory = function() {
+    var ul = document.querySelector("#inventory > ul");
+    for(i in Player.items){
+        var line = document.createElement("li");
+        line.textContent = Player.items[i];
+        ul.appendChild(line);
+}
+
+var displayScene = function() {
+    //Change scene after input: possible repeat of scene if there are more actions (Player.location?)
+}
+
+var report = function() {
+	displayActions();
+	displayInventory();
+	displayScene();
 }
 
 var gameStep = function(){
