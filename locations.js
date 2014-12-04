@@ -6,6 +6,21 @@ function Location (name, descrip){
 
 var locations = [];
 
+/*
+map.isConnected = function(from, to){...}
+
+map.getLocNumber = function(locName){
+     var locNum = -1;
+     for(i in this.locations){
+         if(locName === this.locations[i].name){
+              locNum = i;
+              break;
+         }
+     }
+     return locNum;
+}
+*/
+
 var inHall = new Location("Dining Hall", "You arrive in the dining hall to find a wide variety of food to choose from. You grab a salad and sit down with Michaela. What do you say to her?");
 locations.push(inHall);
 
@@ -15,7 +30,7 @@ locations.push(inClass);
 var inHouse = new Location("Frat House", "You arrive at the frat house with Michaela and the party is in full swing. You see the guy who invited you to the party earlier. What will you do?");
 locations.push(inHouse);
 
-var inClub = new Location("Club", "You enter a noisy dark club with Michaela and several people are already very tipsy. Michaela goes off for a while and you dance by yourself. She comes back and offers you a drink. Do you take it?");
+var inClub = new Location("Club", "You enter a noisy and dark club with Michaela and several people are already very tipsy. Michaela goes off for a while and you dance by yourself. She comes back and offers you a drink. Do you take it?");
 locations.push(inClub);
 
 var inLibrary = new Location("Library", "You enter the quiet library and sit down at a table. Michaela sits down next to you and plays music very loudly from her headphones. She begins to dance widly in her seat. She is getting looks from everyone. What will you do?");
