@@ -9,16 +9,6 @@ var locations = [];
 /*
 map.isConnected = function(from, to){...}
 
-map.getLocNumber = function(locName){
-     var locNum = -1;
-     for(i in this.locations){
-         if(locName === this.locations[i].name){
-              locNum = i;
-              break;
-         }
-     }
-     return locNum;
-}
 */
 
 var inHall = new Location("Dining Hall", "You arrive in the dining hall to find a wide variety of food to choose from. You grab a salad and sit down with Michaela. What do you say to her?");
@@ -59,6 +49,16 @@ var connections = [
 var map = {
     loc: locations,
     connec: connections,
+    getLocNumber: function(locName){
+         var locNum = -1;
+         for(i in this.locations){
+              if(locName === this.locations[i].name){
+                   locNum = i;
+                   break;
+         }
+    }
+    return locNum;
+    }
 }
 
 var test = function(){

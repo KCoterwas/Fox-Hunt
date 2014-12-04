@@ -7,15 +7,18 @@ var Player = {
           if(this.items.indexOf(item) > 0) { //checking for item in room
              items.splice(indexOf(item), 1) //remove it from array, add back to room
           }
-     }
-    /*goto: = function(location){
-              check if locationName exists in map
-                   if so, check if it is connected to currLoc
-                        then, set currLoc to the new location or check for prerequisites
-                             if prerequisites are not met, display message
-                        display message if not connected
-                   display message if location does not exist
-    */
+    },
+    goto: function(location){
+             // if(locName.map >= 0){ //check if locationName exists in map
+                  // if(map.connec[0][i] === 1) {// if so, check if it is connected to currLoc
+                       // currLoc = locName.map[i] // then, set currLoc to the new location or checkfor 						      prerequisites
+                        // if prerequisites are not met, display message
+                  // }else{
+                        // display message if not connected
+             //}else{
+                  // display message if location does not exist
+    }
+    
 }
 
 function clearContent(node){
@@ -23,18 +26,6 @@ function clearContent(node){
          node.removeChild(node.firstChild);
     }
 }
-
-/* Old report function
-var report = function(){
-    console.log('calling report');
-    var ul = document.querySelector("#inventory > ul");
-    for(i in Player.items){
-        var line = document.createElement("li");
-        line.textContent = Player.items[i];
-        ul.appendChild(line);
-    }
-}
-*/
 
 var displayActions = function() {
      var field, action, actionList;
@@ -65,7 +56,9 @@ var displayInventory = function() {
 }
 
 var displayScene = function() {
-    //Change scene after input: possible repeat of scene if there are more actions (Player.location?)
+    var currLoc = document.querySelector("#descrip");
+    clearContent(currLoc);
+    currLoc.textContent = Player.location;
 }
 
 var interpret = function(inString){
