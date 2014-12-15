@@ -3,29 +3,71 @@ function gameIntro() {
     inputBox = document.querySelector("input");
     var nameListener = function(event) {
          var majorListener = function(event) {
-              if (event.keyCode === 13) {
-                   if (majorList.indexOf(this.value) === -1){
-                        var majorError = document.querySelector("#descrip");
-                        majorError.textContent = this.value + " is not an offered major. " + 							 majorError.textContent;
-                        return -1;
-                        inputBox.value = "";
-                   }
+		      var convoListener = function(event){
+		           var answer = document.querySelector("#descrip");
+		                if(event.keyCode === 13) {
+			            clearContent(answer);
+			            var question = this.value.toLowerCase();
+				        this.value == "";
+				        if(question === "tell joke"){
+				             answer.textContent = "Lol joke";
+							 
+				        }
+				        else if(question === "ask major"){
+				             if(Player.major === "communication"){
+						          answer.textContent = "OMG we are both communication!";
+						     }
+						     else
+						          answer.textContent = "I'm a communication major.";
+				        }
+						else if(question === "ask hometown"){
+							answer.textContent = "I'm from LA.";
+						}
+						else if(question === "ask about parties"){
+							answer.textContent = "I hear the frat house has something tonight.";
+				        }
+				        else if(question === "invite to lunch"){
+							answer.textContent = "Cool. Let's go to lunch.";
+							inputBox.removeEventListener("keyup", convoListener);
+							gameStart();
+						}
+						else
+							answer.textContent =  "That is not a valid action.";
+				        
+						}
+			  }
+         if (event.keyCode === 13) {
+              if (majorList.indexOf(this.value.toLowerCase()) === -1){
+                   var majorError = document.querySelector("#descrip");
+                   majorError.textContent = this.value + " is not an offered major. " + 							 majorError.textContent;
+                   inputBox.value = "";
+				   return -1;
+              }
                    if (this.value != -1){
                         setMajor(this.value);
                         inputBox.removeEventListener("keyup", majorListener);
-                        gameStart();
-                   }
+						var startLoc = document.querySelector("#descrip");
+						inputBox.value = "";
+						startLoc.textContent = "You arrive at Marist College for your move in day as a freshman. Your 				   parents have just said their goodbyes and you are now standing outside your 				   room observing all of your new neighbors. A girl approaches you. 'Hi!' she  				   says, 'My name is Michaela. What's yours?' You have a weird feeling about 				   this girl but you respond, 'My name is " + Player.name + ".'";
+						addAction("tell joke");
+						addAction("ask major");
+						addAction("ask hometown");
+						addAction("ask about parties");
+						addAction("invite to lunch");
+						inputBox.addEventListener("keyup", convoListener);
+				   }
               }
               
          }
+		 
          if (event.keyCode === 13) {
               setName(this.value);
-	      var majorQues = document.querySelector("#descrip");
+	          var majorQues = document.querySelector("#descrip");
               clearContent(majorQues);
               inputBox.value = "";
               inputBox.removeEventListener("keyup", nameListener);
               inputBox.addEventListener ("keyup", majorListener);
-              majorQues.textContent = "Please choose a major. You may choose from Communication, 					       Computer Science, or English."
+              majorQues.textContent = "Please choose a major. You may choose from Communication, Computer Science, or English."
          }
     
     };
@@ -47,6 +89,13 @@ function clearContent(node){
     while(node.hasChildNodes()){
          node.removeChild(node.firstChild);
     }
+}
+
+function addAction(str){
+    var convoActions = document.querySelector("#help > ul");
+	var li = document.createElement("li");
+	li.textContent = str;
+	convoActions.appendChild(li);
 }
 
 var displayActions = function() {
@@ -111,9 +160,7 @@ var inputBox;
 
 var gameStart = function(){
     inputBox.value = "";
-    var startLoc = document.querySelector("#descrip");
-    clearContent(startLoc);
-    startLoc.textContent = "You arrive at Marist College for your move in day as a freshman. Your 				   parents have just said their goodbyes and you are now standing outside your 				   room observing all of your new neighbors. A girl approaches you. 'Hi!' she  				   says, 'My name is Michaela. What's yours?' You have a weird feeling about 				   this girl but you respond, 'My name is " + Player.name + ".'";
+	console.log("gamestart");
     inputBox.addEventListener("keyup", function(event){
          if(event.keyCode === 13){
               gameStep(this.value);
