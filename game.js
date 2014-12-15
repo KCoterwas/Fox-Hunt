@@ -8,26 +8,25 @@ function gameIntro() {
 		                if(event.keyCode === 13) {
 			            clearContent(answer);
 			            var question = this.value.toLowerCase();
-				        this.value == "";
+				        this.value = "";
 				        if(question === "tell joke"){
-				             answer.textContent = "Lol joke";
+				             answer.textContent = "You make a clever comment and Michaela laughs. This is no ordinary laugh, however, this laugh sounds like a witch's cackle echoing trough the hall. You find this strange and you nervously laugh along. What do you ask next?";
 							 
 				        }
 				        else if(question === "ask major"){
-				             if(Player.major === "communication"){
-						          answer.textContent = "OMG we are both communication!";
+				             if(Player.major.toLowerCase() === "communication"){
+						          answer.textContent = "Before you can get a word out to ask Michaela's major, she blurts 'So what's you major?' You say that you're a communications major and her eyes widen. 'NO WAY! I'm a communications major too! This is so great! We can take classes together, study together...' She continues talking and you feel like you should change the subject. What do you ask next?";
 						     }
 						     else
-						          answer.textContent = "I'm a communication major.";
+						          answer.textContent = "Before you can get a word out to ask Michaela's major, she blurts 'So what's you major?' You tell her that you are a " + Player.major + " major. 'I mean that's cool I guess. I'm a communications major by the way. You feel a bit awkward and you want to change the subject. What do you ask next?";
 				        }
 						else if(question === "ask hometown"){
-							answer.textContent = "I'm from LA.";
+							answer.textContent = "'So where are you from?' You ask. 'Oh I'm from the L.A. area. I love beaches and partying, so if you want to find me on the weekend, or really any time of the week, I'll be at one of those things.' You nod your head and decide to keep the conversation going. What do you ask next?";
 						}
 						else if(question === "ask about parties"){
-							answer.textContent = "I hear the frat house has something tonight.";
+							answer.textContent = "'You asked the right girl about parties. I hear the frat house has something tonight. We just have to get invited by a frat guy. Hopefully a cute frat guy.' What do you ask next?";
 				        }
 				        else if(question === "invite to lunch"){
-							answer.textContent = "Cool. Let's go to lunch.";
 							inputBox.removeEventListener("keyup", convoListener);
 							gameStart();
 						}
@@ -39,7 +38,7 @@ function gameIntro() {
          if (event.keyCode === 13) {
               if (majorList.indexOf(this.value.toLowerCase()) === -1){
                    var majorError = document.querySelector("#descrip");
-                   majorError.textContent = this.value + " is not an offered major. " + 							 majorError.textContent;
+                   majorError.textContent = this.value + " is not an offered major. " + majorError.textContent;
                    inputBox.value = "";
 				   return -1;
               }
@@ -48,7 +47,7 @@ function gameIntro() {
                         inputBox.removeEventListener("keyup", majorListener);
 						var startLoc = document.querySelector("#descrip");
 						inputBox.value = "";
-						startLoc.textContent = "You arrive at Marist College for your move in day as a freshman. Your 				   parents have just said their goodbyes and you are now standing outside your 				   room observing all of your new neighbors. A girl approaches you. 'Hi!' she  				   says, 'My name is Michaela. What's yours?' You have a weird feeling about 				   this girl but you respond, 'My name is " + Player.name + ".'";
+						startLoc.textContent = "You arrive at Marist College for your move in day as a freshman. Your parents have just said their goodbyes and you are now standing outside your 				   room observing all of your new neighbors. A girl approaches you. 'Hi!' she  				   says, 'My name is Michaela. What's yours?' You have a weird feeling about 				   this girl but you respond, 'My name is " + Player.name + ".'";
 						addAction("tell joke");
 						addAction("ask major");
 						addAction("ask hometown");

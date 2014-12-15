@@ -11,7 +11,7 @@ map.isConnected = function(from, to){...}
 
 */
 
-var inHall = new Location("Dining Hall", "You arrive in the dining hall to find a wide variety of food to choose from. You grab a salad and sit down with Michaela. What do you say to her?");
+var inHall = new Location("Dining Hall", "'Cool. Let's go to lunch.' She says. You arrive in the dining hall to find a wide variety of food to choose from. You grab a salad and sit down with Michaela. What do you say to her?");
 locations.push(inHall);
 
 var inClass = new Location("Class", "You sit down in class and begin to listen to the droning lecture. What will you do?");
