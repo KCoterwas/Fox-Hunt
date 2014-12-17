@@ -6,18 +6,35 @@ function Location (name, descrip){
 
 var locations = [];
 
-/*
-map.isConnected = function(from, to){...}
+var isConnected = function(from, to){
+    var fromIndex = indexOfLoc(from);
+	var toIndex = indexOfLoc(to);
+	console.log(map.connec);
+	if(map.connec[fromIndex][toIndex] === 1){
+	     return true;
+	}
+	else{
+	     return false;
+    }
+}
 
-*/
+var indexOfLoc = function(name){
+    var result = -1;
+    for(var i = 0; i < map.loc.length; i++){
+	     if(map.loc[i].name === name){
+		      result = i;
+		 }
+	}
+	return result;
+}
 
 var inHall = new Location("Dining Hall", "'Cool. Let's go to lunch.' She says. You arrive in the dining hall to find a wide variety of food to choose from. You grab a salad and sit down with Michaela. What do you say to her?");
 locations.push(inHall);
 
-var inClass = new Location("Class", "You sit down in class and begin to listen to the droning lecture. What will you do?");
+var inClass = new Location("class", "You sit down in class and begin to listen to the droning lecture. What will you do?");
 locations.push(inClass);
 
-var inHouse = new Location("Frat House", "You arrive at the frat house with Michaela and the party is in full swing. You see the guy who invited you to the party earlier. What will you do?");
+var inHouse = new Location("frat house", "You arrive at the frat house with Michaela and the party is in full swing. You see the guy who invited you to the party earlier. What will you do?");
 locations.push(inHouse);
 
 var inClub = new Location("Club", "You enter a noisy and dark club with Michaela and several people are already very tipsy. Michaela goes off for a while and you dance by yourself. She comes back and offers you a drink. Do you take it?");

@@ -28,6 +28,7 @@ function gameIntro() {
 				        }
 				        else if(question === "invite to lunch"){
 							inputBox.removeEventListener("keyup", convoListener);
+							clearContent(document.querySelector("#help > ul"));
 							gameStart();
 						}
 						else
@@ -124,7 +125,7 @@ var displayInventory = function() {
 var displayScene = function() {
     var currLoc = document.querySelector("#descrip");
     clearContent(currLoc);
-    currLoc.textContent = Player.location;
+    currLoc.textContent = Player.location.description;
 }
 
 var interpret = function(inString){
@@ -134,7 +135,7 @@ var interpret = function(inString){
     var lowerString = trimString.toLowerCase();
     var words = lowerString.split(" ");
     Obj.action = words.shift();
-    Obj.object = words.join();
+    Obj.object = words.join(" ");
     return Obj;
 }
 
@@ -159,7 +160,7 @@ var inputBox;
 
 var gameStart = function(){
     inputBox.value = "";
-	console.log("gamestart");
+	displayScene();
     inputBox.addEventListener("keyup", function(event){
          if(event.keyCode === 13){
               gameStep(this.value);
