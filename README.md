@@ -15,27 +15,7 @@ Player, person named from the input. Lives in single room in Champ.
 
 Michaela, floor neighbor (found in all locations). Michaela is initially friendly and begins to show up at every location at the same time as the player. She becomes very interested in the player and their activities. She is actually slowly turning other students into were-foxes because she is actually an alien trying to blend in with college students. This happens by accepting a drink from her at parties. Her goal is to turn the whole campus into were-foxes because that is how she interprets school spirit.
 
-Frat boy, invites player and Michaela to frat party at club. He is found at the start of the frat party, but "disappears" at the end.
-
-Possible Actions:
-
-go to location
-
-take
-
-drink
-
-sleep
-
-do homework
-
-run
-
-trap
-
-help
-
-shake hands
+Frat boy, invites player and Michaela to frat party. He is found at the start of the frat party, but "disappears" at the end.
 
 Endgame Scenarios:
 

@@ -77,12 +77,10 @@ function gameIntro() {
 
 function setName(input){
     Player.name = input;
-    console.log(Player.name);
 }
 
 function setMajor(input){
     Player.major = input;
-    console.log(Player.major);
 }
 
 function clearContent(node){
@@ -96,30 +94,6 @@ function addAction(str){
 	var li = document.createElement("li");
 	li.textContent = str;
 	convoActions.appendChild(li);
-}
-
-var displayActions = function() {
-    var field, action, actionList;
-    actionList = document.querySelector("#help > ul");
-    clearContent(actionList);
-    for (field in Player) {
-        if (Player[field] instanceof Function) {
-            action = document.createElement("li");
-            action.textContent = field;
-            actionList.appendChild(action);
-        }
-    }
-}
-
-var displayInventory = function() {
-    var i, item, inventory;
-    inventory = document.querySelector("#inventory > ul");
-    clearContent(inventory);
-    for (i in Player.items) {
-        item = document.createElement("li");
-        item.textContent = Player.items[i];
-        inventory.appendChild(item);
-    }
 }
 
 var displayScene = function() {
@@ -145,8 +119,6 @@ var execute = function(command){
 }
 
 var report = function() {
-	displayActions();
-	displayInventory();
 	displayScene();
 }
 
@@ -166,6 +138,47 @@ var gameStart = function(){
               gameStep(this.value);
          }
     })
+	if(Player.location.name === "dining hall"){
+	     inputBox = document.querySelector("input");
+		 var lunchListenter = function(event){
+		      var answer = document.querySelector("#descrip");
+		                if(event.keyCode === 13) {
+			                 clearContent(answer);
+			                 var question = this.value.toLowerCase();
+				             this.value = "";
+						     if (badLunch && question === "ask opinion on food"){
+						          answer.textContent = "'Isn't the food awful here?' Michaela says. 'I think it's just today. I'm sure it'll be better on other days.' You say. 'Oh stop being so optimistic, " + Player.name + ". It's cafeteria food. It's nothing like my food back home made by my personal chef. I mean perks of being rule... rich!' You caught her slip-up and wonder what she was going to say, but decide to not ask about it now. What do you do now?";
+						     }
+						     else if (question === "make small talk"){
+							      var partyInvite = true;
+						          answer.textContent = "'Sooo... Why did you pick Marist?' You ask. 'My parents thought this college was best suited for my ambitious goals of taking control of people...through media, of course.' She says. You're caught a little off guard by this answer, and you don't know what to say, so you stare at your food and take some bites. Just then, a frat boy comes over, staring at you, but Michaela says, 'Oh hey! Any cool parties tonight?' 'In fact, there is. I was going to invite your friend here to come.' He says. 'Cool! We'll be there!' Michaela says for you. You're a bit insulted by her answering for you, but glad that she accepted. What do you do now? ";
+						     }
+							 else if (question === "ask about classes"){
+						          answer.textContent = "'So what classes were you put in?' Michaela asks, almost as if she read your mind. 'Um... well I have writing for college... Oh no!' You just realized that your class starts in five minutes. There's no way you'll make it on time. Do you want to give up on class and go to your room until the party, or run to class?";
+								  addAction("goto class");
+						     }
+							 else if (question === "goto class"){
+							      inputBox.removeEventListener("keyup", lunchListenter);
+								  clearContent(document.querySelector("#help > ul"));
+								  Player.goto("class");
+							 }
+							 else if (question === "goto dorm room"){
+							      inputBox.removeEventListener("keyup", lunchListenter);
+								  clearContent(document.querySelector("#help > ul"));
+								  Player.goto("dorm room");
+							 }
+							 else
+							     answer.textContent = "That is not a valid action.";
+						}
+		 }
+		 inputBox.addEventListener("keyup", lunchListenter);
+		 if (badLunch){
+		      addAction("ask opinion on food");
+		 }
+		 addAction("make small talk");
+		 addAction("ask about classes");
+		 addAction("goto dorm room");
+	}
 }
 
 window.onload = gameIntro;
