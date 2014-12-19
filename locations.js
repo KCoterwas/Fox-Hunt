@@ -40,7 +40,7 @@ if (Math.random() > 0.51) {
 }
 locations.push(inHall);
 
-if(Math.random() > 0.8) {
+if(Math.random() > 0.2) {
    var onTime = true;
    var inClass = new Location("class", "You leave Michaela at the dining hall and rush to class. You miraculously made it on time. You sit down in class and begin to listen to the droning lecture. What will you do?");
 } else {

@@ -112,16 +112,6 @@ var execute = function(command) {
     Player[command.action](command.object);
 }
 
-var report = function() {
-    displayScene();
-}
-
-var gameStep = function(input) {
-    var cmd = interpret(input);
-    var result = execute(cmd);
-    report(result);
-}
-
 var inputBox;
 
 var gameStart = function() {
@@ -150,11 +140,9 @@ var gameStart = function() {
                     inputBox.removeEventListener("keyup", lunchListenter);
                     clearContent(document.querySelector("#help > ul"));
                     Player.moveto("class");
-					inputBox.addEventListener("keyup", function(event) {
-                       if (event.keyCode === 13) {
-                           gameStep(this.value);
-                       }
-					})
+                    inputBox.addEventListener("keyup", classListener);
+					addAction("a");
+                    addAction("b");
                 } else if (question === "go to dorm room") {
                     inputBox.removeEventListener("keyup", lunchListenter);
                     clearContent(document.querySelector("#help > ul"));
@@ -162,13 +150,12 @@ var gameStart = function() {
 					   getLocation("dorm room").description = "You have no desire to go to class today. Thankfully it's syllabus week so you didn't miss much. How will you pass the time until the party?";
 					}
                     Player.moveto("dorm room");
-					inputBox.addEventListener("keyup", function(event) {
-					   if (event.keyCode === 13) {
-                           gameStep(this.value);
-                       }
-                    })
-                } else
+                    inputBox.addEventListener("keyup", DRoomListener);
+					addAction("a");
+                    addAction("b");
+                } else {
                     answer.textContent = "That is not a valid action.";
+				}
             }
         }
         inputBox.addEventListener("keyup", lunchListenter);
@@ -179,27 +166,38 @@ var gameStart = function() {
         addAction("ask about classes");
         addAction("go to dorm room");
     }
-	if (Player.location.name === "class") {
-        inputBox = document.querySelector("input");
-        var classListenter = function(event) {
-            var result = document.querySelector("#descrip");
-            if (event.keyCode === 13) {
-                clearContent(result);
-                var action = this.value.toLowerCase();
-                this.value = "";
-                if (action === "a") {
-                    result.textContent = "a";
-                } else if (action === "b") {
-                    result.textContent = "b";
-                } else
-                    answer.textContent = "That is not a valid action.";
-            }
-        }
-        inputBox.addEventListener("keyup", classListenter);
-        addAction("a");
-        addAction("b");
+}
+
+var classListener = function(event) {
+	inputBox = document.querySelector("input");
+    var result = document.querySelector("#descrip");
+    if (event.keyCode === 13) {
+        clearContent(result);
+        var action = this.value.toLowerCase();
+        this.value = "";
+        if (action === "a") {
+            result.textContent = "a";
+        } else if (action === "b") {
+            result.textContent = "b";
+        } else
+            answer.textContent = "That is not a valid action.";
     }
 }
 
+var DRoomListener = function(event) {
+	inputBox = document.querySelector("input");
+    var result = document.querySelector("#descrip");
+    if (event.keyCode === 13) {
+        clearContent(result);
+        var action = this.value.toLowerCase();
+        this.value = "";
+        if (action === "a") {
+            result.textContent = "a";
+        } else if (action === "b") {
+            result.textContent = "b";
+        } else
+            answer.textContent = "That is not a valid action.";
+    }
+}
 window.onload = gameIntro;
 
