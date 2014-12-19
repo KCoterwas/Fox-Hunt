@@ -21,6 +21,6 @@ Endgame Scenarios:
 
 Turn into a fox and fail school - happens if accepts drink from Michaela. No time to do homework at night and fail all classes. Can happen after frat house scene and club scene.
 
-Return Michaela to home planet - happens if trap in her dorm room after discovery of her powers. Can happen after traveling to all locations.
+Return Michaela to home planet - happens if trap in her dorm room after discovery of her powers. Can happen after travelling to all locations.
 
 Join Michaela and gain powers - happens if Player shakes hands in agreement to join her. Can happen after visiting all locations.
