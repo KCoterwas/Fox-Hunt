@@ -12,7 +12,8 @@ function gameIntro() {
                     this.value = "";
                     if (question === "tell joke") {
                         answer.textContent = "You make a clever comment and Michaela laughs. This is no ordinary laugh, however, this laugh sounds like a witch's cackle echoing through the hall. You find this strange and you nervously laugh along. What do you ask next?";
-                    } else if (question === "ask major") {
+                        //removeAction("tell joke");
+					} else if (question === "ask major") {
                         if (Player.major.toLowerCase() === "communication") {
                             answer.textContent = "Before you can get a word out to ask Michaela's major, she blurts 'So what's you major?' You say that you're a communications major and her eyes widen. 'NO WAY! I'm a communications major too! This is so great! We can take classes together, study together...' She continues talking and you feel like you should change the subject. What do you ask next?";
                         } else
@@ -90,6 +91,13 @@ function addAction(str) {
     convoActions.appendChild(li);
 }
 
+function removeAction(str) {
+    var convoActions = document.querySelector("#help > ul");
+    var li = document.createElement("li");
+    li.textContent = str;
+    convoActions.removeChild(li);
+}
+
 var displayScene = function() {
     var currLoc = document.querySelector("#descrip");
     clearContent(currLoc);
@@ -141,18 +149,26 @@ var gameStart = function() {
                     clearContent(document.querySelector("#help > ul"));
                     Player.moveto("class");
                     inputBox.addEventListener("keyup", classListener);
-					addAction("a");
-                    addAction("b");
+					addAction("take notes");
+                    addAction("fall asleep");
                 } else if (question === "go to dorm room") {
                     inputBox.removeEventListener("keyup", lunchListenter);
                     clearContent(document.querySelector("#help > ul"));
 					if (askClass === true){
-					   getLocation("dorm room").description = "You have no desire to go to class today. Thankfully it's syllabus week so you didn't miss much. How will you pass the time until the party?";
+					   if (partyInvite === true) {
+					       getLocation("dorm room").description = "You have no desire to go to class today. Thankfully it's syllabus week so you didn't miss much. How will you pass the time until the party?";
+					   } else {
+					       getLocation("dorm room").description = "You have no desire to go to class today. Thankfully it's syllabus week so you didn't miss much. How will you pass the time?"
+					   }
 					}
                     Player.moveto("dorm room");
                     inputBox.addEventListener("keyup", DRoomListener);
-					addAction("a");
-                    addAction("b");
+					if (Player.major.toLowerCase() === "computer science"){
+		                addAction("play video games");
+		            }
+					addAction("take a nap");
+                    addAction("do homework");
+					addAction("watch Netflix");
                 } else {
                     answer.textContent = "That is not a valid action.";
 				}
@@ -175,10 +191,10 @@ var classListener = function(event) {
         clearContent(result);
         var action = this.value.toLowerCase();
         this.value = "";
-        if (action === "a") {
-            result.textContent = "a";
-        } else if (action === "b") {
-            result.textContent = "b";
+        if (action === "take notes") {
+            result.textContent = "You are a studious person and want to do well in this class. You take several notes and feel well about this class.";
+        } else if (action === "fall asleep") {
+            result.textContent = "You have no desire to pay attention in this class. You know how to write, right? You begin to drift off to sleep when you hear, '" + Player.name + "? Are you falling asleep in MY class? DO NOT make that mistake again. 'Great.' You think. 'Starting off college on the right foot.'";
         } else
             answer.textContent = "That is not a valid action.";
     }
@@ -191,10 +207,14 @@ var DRoomListener = function(event) {
         clearContent(result);
         var action = this.value.toLowerCase();
         this.value = "";
-        if (action === "a") {
-            result.textContent = "a";
-        } else if (action === "b") {
-            result.textContent = "b";
+        if (action === "play video games") {
+            result.textContent = "You spend several hours passing the time playing games off of Steam and completely lose track of time.";
+        } else if (action === "take a nap") {
+            result.textContent = "You pass the time by taking what you thought would be a short nap. When you wake up, it's already 7:56.";
+		} else if (action === "do homework") {
+		    result.textContent = "Being a smart student, you do your homework ahead of time so you're not behind schedule. You never know when something might set you back.";
+		} else if (action === "watch netflix") {
+		    result.textContent = "You think that now is the perfect time to sit back and watch some mind-numbing shows on Netflix.";
         } else
             answer.textContent = "That is not a valid action.";
     }
